@@ -1,6 +1,15 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:mahara_last/fcm_helper.dart';
+import 'package:mahara_last/notification_helper.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await FcmHelper.fcmHelper.configureFcm();
+  NotHelper.notHelper.configureNotification();
   runApp(const MyApp());
 }
 
@@ -51,14 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+    log("hello from dio");
+    FcmHelper.fcmHelper.sendNotificationToUser(
+        'c4qlidKbRpyhhW_1KRojTU:APA91bEBhut_bq8J-VcBtpvCYhZgoUKqmXe_qcrZPd3RfQpIDjyxsOToLdvERz4a-6aKdGnpjN9Mfd4-dSTbI0V8KnaOC3akc9mFrCCb6vX8L7ejMaHdx6CtD2CEZvq1Pwi_hURx8Y2a',
+        "hello from flutter",
+        "this is the body");
   }
 
   @override
