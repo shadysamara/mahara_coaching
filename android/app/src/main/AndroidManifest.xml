@@ -1,9 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mahara_last">
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
    <application
         android:label="mahara_last"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:showWhenLocked="true"
+        android:turnScreenOn="true"
+        android:exported="true">
+          <service
+            android:name="com.dexterous.flutterlocalnotifications.ForegroundService"        
+            android:exported="false"
+            android:stopWithTask="false"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
